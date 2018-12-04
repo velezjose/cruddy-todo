@@ -7,24 +7,15 @@ var items = {};
 
 // Public API - Fix these CRUD functions ///////////////////////////////////////
 
-exports.create = (text, addTodo) => {
-  // var id = 
-  // items[id] = text;
-  // create file with id as file name and text as data
-
+exports.create = (text, callback) => {
   counter.getNextUniqueId((err, filename) => {
-    //debugger
     fs.writeFile(exports.dataDir + `/${filename}.txt`, text, function(err) {
       if (err) {
         return console.log(err);
       }
-      console.log(`filename ${filename}.txt was created with ${text}`);
+      callback(null, { id: filename, text });
     });
-    
-    addTodo(null, { filename, text });
   });
-
-  // addTodo(null, { id, text });
 };
 
 exports.readAll = (callback) => {

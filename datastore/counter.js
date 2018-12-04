@@ -14,16 +14,6 @@ const zeroPaddedNumber = (num) => {
   return sprintf('%05d', num);
 };
 
-const readCounter = function(callback) {
-  fs.readFile(exports.counterFile, (err, fileData) => {
-    if (err) {
-      writeCounter(0, callback);
-    } else {
-      callback(null, Number(fileData));
-    }
-  });
-};
-
 const writeCounter = (count, callback) => {
   var counterString = zeroPaddedNumber(count);
   fs.writeFile(exports.counterFile, counterString, (err) => {
@@ -31,6 +21,16 @@ const writeCounter = (count, callback) => {
       throw ('error writing counter');
     } else {
       callback(null, counterString);
+    }
+  });
+};
+
+const readCounter = function(callback) {
+  fs.readFile(exports.counterFile, (err, fileData) => {
+    if (err) {
+      writeCounter(0, callback);
+    } else {
+      callback(null, Number(fileData));
     }
   });
 };

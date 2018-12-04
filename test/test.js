@@ -54,7 +54,6 @@ describe('getNextUniqueId', () => {
     fs.writeFileSync(counter.counterFile, '00371');
     counter.getNextUniqueId((err, id) => {
       const counterFileContents = fs.readFileSync(counter.counterFile).toString();
-      console.log('counterfile value -->', counterFileContents);
       expect(counterFileContents).to.equal('00372');
       done();
     });
